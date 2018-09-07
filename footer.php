@@ -20,7 +20,7 @@
 				</div>
 				<div class="third">
 				</div>
-				<div class="third"><br>
+				<div class="third">
 				</div>
 
 				<!--<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'blimey' ) ); ?>">
