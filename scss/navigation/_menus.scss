@@ -1,0 +1,194 @@
+// Desktop Navigation 
+
+.primary-nav-wrapper { 
+	width: 100%;
+	background-color: $color__top_level_menu_bkgnd;
+}
+
+nav#primary-nav {
+	padding: 0; 
+	max-width: $laptop;
+	width: 100%;
+	display: block;
+	margin: 0 auto;
+	
+	ul{
+	    list-style: none;
+	    margin: 0;
+	    padding: 0;
+
+		li {
+			float: left;
+			position: relative;
+			font-family :$font__sans;
+			
+			a,
+			a:visited {
+				display: block;
+				color: #fff;
+				text-decoration: none;
+				padding: 10px 20px;
+				
+				&:hover {
+					background: $color__link-bkgnd-hover;
+					color: $color__nav-font;
+				}
+				
+				&:not(:only-child):after {
+					padding-left: 4px;
+					content: ' ▾';
+				}
+			} 
+			
+			// Dropdown list
+		
+			ul  {
+				display: none;
+			
+				li {
+					min-width: 190px;
+					background-color: $color__submenu_bkgnd;
+				
+					a {
+						padding: 15px;
+						line-height: 20px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.sub-menu {
+	position: absolute;
+	display: none;
+	z-index: 1;
+	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+/****************** It's burgertime! ******************/
+
+// The burger itself. Yum. 
+
+.nav-mobile { 
+	display: none;
+	position: absolute;
+	top: 50px;
+	right: 0;
+	background: $color__burger-bkgnd;
+	height: $size__burger-bkgnd;
+	width: $size__burger-bkgnd;
+}
+
+@media only screen and (max-width: 798px) {
+	.nav-mobile {
+		display: block; // Show the meat 
+	}
+
+	//Mobile Menu Container
+	nav#primary-nav {
+		background-color: none;
+
+		ul{
+			display: none;
+
+			li {
+				float: none;
+
+				a {
+					padding: 15px;
+					line-height: 20px;
+				}
+
+				ul li a {
+					padding-left: 30px;
+				}
+			}
+		}
+	}
+
+	.sub-menu {
+		position: static;
+	}
+}
+
+
+
+#nav-toggle {
+	position: absolute;
+	left: 18px;
+	top: 22px;
+	cursor: pointer;
+	padding: 10px 35px 16px 0px;
+	
+	span,
+	span:before,
+	span:after {
+		cursor: pointer;
+		border-radius: 1px;
+		height: 3px;
+		width: 35px;
+		background: $color__burger;
+		position: absolute;
+		display: block;
+		content: '';
+		transition: all 300ms ease-in-out;
+	}
+
+	span:before {
+		top: -10px;
+	}
+
+	span:after {
+		bottom: -10px;
+	}
+
+	&.active span {
+		background-color: transparent;
+	
+		&:before,
+		&:after {
+			top: 0;
+		}
+	
+		&:before {
+			transform: rotate(45deg);
+		}
+		
+		&:after {
+			transform: rotate(-45deg);
+		}
+	}
+}
+
+
+@media screen and (min-width: $tabletV) {
+	#primary-menu {
+		@include flexbox();
+		@include justify-content(space-around);
+		@include flex-direction(row);
+		width: 100%;
+		
+	}
+}
+
+.comment-navigation,
+.posts-navigation,
+.post-navigation {
+
+	.site-main & {
+		margin: 0 0 1.5em;
+		overflow: hidden;
+	}
+
+	.nav-previous {
+		float: left;
+		width: 50%;
+	}
+
+	.nav-next {
+		float: right;
+		text-align: right;
+		width: 50%;
+	}
+}

@@ -1,0 +1,269 @@
+.site-content {
+	display: flex;
+	justify-content: center;
+}
+
+.content-area {
+	flex: 2;
+}
+
+.site-content .widget-area {
+	flex: 1;
+}
+
+
+//flex-grow: 1 // this means that the div will grow in same proportion as the window-size
+//flex-shrink: 1 // this means that the div will shrink in same proportion as the window-size 
+//flex-basis: 0 // this means that the div does not have a starting value as such and will take up screen as per the screen size available for.e.g:- if 3 divs are in the wrapper then each div will take 33%.
+
+
+.grid {
+	@include flexbox();
+	@include flex-flow(row); 
+	@include flex-wrap(wrap);
+}
+
+.grid-cell {
+	flex: 1; //Shorthand for flex: 1 1 0 and flex: 1 1 0px on IE;
+}
+
+$gutter: 1em; // With gutters
+
+.gutters {
+	margin-left: -$gutter;
+	
+	.grid-cell {
+		padding-left: $gutter;
+	}
+		
+	.grid--nested {
+
+		.grid-cell:first-of-type {
+			
+			.demo {
+				margin-right: 1em;
+  			}
+		}
+	}  
+}
+
+
+// Justify content per row
+
+.grid--right {
+	@include justify-content(flex-end); 
+}
+.grid--center {
+	@include justify-content(center);
+}
+ 
+ 
+// Vertically align items per row 
+
+.grid--top {
+  	align-items: flex-start;
+}
+.grid--bottom {
+  	@include align-items(flex-end);
+}
+.grid--center {
+  	@include align-items(center);
+}
+
+
+// Vertically align items per cell
+
+.grid-cell--top {
+	@include align-self(flex-start);
+}
+.grid-cell--bottom {
+	align-self: flex-end;
+}
+.grid-cell--center {
+	@include align-self(center);
+}
+
+
+
+
+// Base classes for all media
+
+.grid--cols-2 > .grid-cell {
+	flex: 0 0 100%; 
+}
+
+.grid--cols-3 > .grid-cell {
+	flex: 0 0 100%; 
+}
+
+.grid--cols-4 > .grid-cell {
+	flex: 0 0 100%;
+}
+
+.grid--cols-6 > .grid-cell {
+	flex: 0 0 100%; 
+}
+
+.grid--cols-12 > .grid-cell {
+	flex: 0 0 calc(33.3333% - #{$gutter}); 
+}
+
+.grid--cols-12 > .grid-cell {
+	flex: 1 1 calc(50% - #{$gutter}); 
+}
+
+.grid--holly-grail {
+	
+	.aside, .main {
+    	flex: 1 100%;
+	}
+}
+
+// One of -- columns
+
+.grid--1of2 > .grid-cell,
+.grid--1of4 > .grid-cell:first-of-type,
+.grid--1of3 > .grid-cell:first-of-type{
+	flex: 0 0 100%;
+}
+.grid--1of6 > .grid-cell:first-of-type {
+	flex: 0 0 50%;
+}
+
+.grid--fit > .grid-cell {
+	flex: 1;
+}
+.grid--full > .grid-cell {
+	flex: 0 0 100%;
+}
+
+
+
+// Base classes for tablets <600
+
+@include mobileH {
+	
+	.grid--cols-2 > .grid-cell {
+		flex: 1 1 calc(50% - #{$gutter});     
+	}
+	
+	.grid--cols-3 > .grid-cell {
+		flex: 1 1 calc(33% - #{$gutter});     
+	}
+	
+	.grid--cols-4 > .grid-cell {
+		flex: 1 1 calc(50% - #{$gutter});     
+	}
+	
+	.grid--cols-6 > .grid-cell {
+	    flex: 1 1 calc(33.333% - #{$gutter});  
+	}
+	
+	.grid--cols-12 > .grid-cell {
+	    flex: 1 1 calc(25% - #{$gutter});  
+	}
+	
+	
+}
+
+
+
+// Base classes for large phones and small tablets <768 
+
+@include tabletH {
+	
+	.grid--1of6 > .grid-cell:first-of-type {
+		flex: 0 0 30%;
+	}
+	
+	.grid--1of4 > .grid-cell:first-of-type {
+		flex: 0 0 50%;
+	}
+	
+	.grid--1of3 > .grid-cell:first-of-type {
+		flex: 0 0 100%;
+	}
+	
+	.grid--cols-6 > .grid-cell {
+	    flex: 1 1 calc(50% - #{$gutter});  
+	}
+	
+	.grid--cols-12 > .grid-cell {
+	    flex: 1 1 calc(25% - #{$gutter});  
+	}
+}
+
+// Base classes for large tablets  
+
+@include tabletV {
+	.grid--cols-2 > .grid-cell,
+	.grid--cols-3 > .grid-cell,
+	.grid--cols-4 > .grid-cell,
+	.grid--cols-6 > .grid-cell {
+		flex: 1;  
+	}
+	
+	.grid--1of2 > .grid-cell {
+		flex: 0 0 50%;
+	}
+	
+	.grid--1of6 > .grid-cell:first-of-type {
+		flex: 0 0 16.6666%;
+	}
+	
+	.grid--1of4 > .grid-cell:first-of-type {
+		flex: 0 0 25%;
+	}
+	
+	.grid--1of3 > .grid-cell:first-of-type {
+		flex: 0 0 30%;
+	}
+	
+	.gutters.grid--nested {
+	
+		.grid-cell:first-of-type {
+	
+			.demo {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+// Base classes for laptops & desktops >1024 
+
+@include tabletH {
+	.grid--cols-12 > .grid-cell {
+	    flex: 1 1 calc(8.333% - #{$gutter});  
+	}
+}
+
+// Contents classes
+
+.demo {  // blue borders and fills
+	text-align: center;
+	padding: .8em 1em 0;
+	margin-bottom: 1em;
+	background: $demoMain;
+	transition: background-color 0.3s ease;
+	border: 1px solid $demoBorder;
+	border-radius: 3px;
+	
+	&:after {
+		content: "";
+		display: block;
+		margin-top: .8em;
+		height: 1px;
+	}
+	&:hover {
+		background: $demoMainDark;
+	}
+}
+section.flexbox {
+	.col-1of1::before { content: "1"; }
+	.col-1of2::before { content: "1/2"; }
+	.col-1of3::before { content: "1/3"; }
+	.col-1of4::before { content: "1/4"; }
+	.col-1of6::before { content: "1/6"; }
+	.col-1of12::before { content: "1/12"; }
+}

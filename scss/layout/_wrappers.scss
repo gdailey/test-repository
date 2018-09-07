@@ -1,0 +1,18 @@
+.wrapper {
+	padding: 0;
+	display: block;
+	margin: 0 auto;
+	max-width: $desktop;
+	@include flexbox();
+	@include justify-content(center);
+}
+
+.wrapper-inner {
+	width: 96%;
+	margin: 0 auto;
+	display: block;
+	
+	@include tabletV {
+    	width: 98%;
+  	}
+}
